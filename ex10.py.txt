@@ -1,0 +1,27 @@
+from health_risk_analyzer import calculate_risk_score, classify_risk
+
+
+def test_low_risk():
+    score = calculate_risk_score(30, 22, 110, 90, 180)
+    assert score == 0
+    assert classify_risk(score) == "LOW RISK"
+
+
+def test_moderate_risk():
+    score = calculate_risk_score(45, 28, 145, 135, 190)
+    assert score == 5
+    assert classify_risk(score) == "MODERATE RISK"
+
+
+def test_high_risk():
+    score = calculate_risk_score(45, 28, 145, 135, 220)
+    assert score == 6
+    assert classify_risk(score) == "HIGH RISK"
+
+
+def test_boundaries():
+    assert classify_risk(2) == "LOW RISK"
+    assert classify_risk(3) == "MODERATE RISK"
+    assert classify_risk(5) == "MODERATE RISK"
+    assert classify_risk(6) == "HIGH RISK"
+
